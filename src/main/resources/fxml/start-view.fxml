@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.BorderPane?>
-
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.zeki.myagend.controller.scene.StartController" />
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<VBox id="startPane" alignment="CENTER" stylesheets="@../css/global-styles.css" xmlns="http://javafx.com/javafx/25"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.zeki.myagend.controller.scene.StartController">
+    <children>
+        <Label fx:id="title" text="Mi agenda">
+            <VBox.margin>
+                <Insets bottom="20.0"/>
+            </VBox.margin>
+        </Label>
+        <ImageView fx:id="logoImage" pickOnBounds="true">
+            <image>
+                <Image url="@../img/main_icon.png"/>
+            </image>
+        </ImageView>
+    </children>
+</VBox>

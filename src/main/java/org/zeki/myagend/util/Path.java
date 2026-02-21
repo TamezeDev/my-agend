@@ -4,8 +4,9 @@ public class Path {
     private static Path instance;
     //VIEWS
     private final String START_VIEW = "/fxml/start-view.fxml";
+    private final String MAIN_AGEND_VIEW = "/fxml/main-agend-view.fxml";
     //IMG
-    private final String MAIN_ICON = "/ img/main_icon.png";
+    private final String MAIN_ICON = "/img/main_icon.png";
     //CSS
     private final String GLOBAL_STYLES = "/css/global-styles.css";
 
@@ -29,5 +30,9 @@ public class Path {
 
     public String getGLOBAL_STYLES() {
         return GLOBAL_STYLES;
+    }
+
+    public String getMAIN_AGEND_VIEW() {
+        return MAIN_AGEND_VIEW;
     }
 }
