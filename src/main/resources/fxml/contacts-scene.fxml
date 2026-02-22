@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane id="mainMenuPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/global-styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.zeki.myagend.controller.scene.ContactsSceneController">
+   <top>
+      <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="30.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#addContact" styleClass="model-ButtonA" text="Añadir contacto" />
+            <HBox alignment="CENTER">
+               <children>
+                  <TextField alignment="CENTER" promptText="Buscar contacto" />
+                  <Button mnemonicParsing="false" text="Buscar" />
+               </children>
+            </HBox>
+            <ColorPicker />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="20.0" top="20.0" />
+         </BorderPane.margin>
+      </HBox>
+   </top>
+   <center>
+      <ScrollPane fitToWidth="true" maxHeight="400.0" maxWidth="450.0" BorderPane.alignment="CENTER">
+         <content>
+            <HBox alignment="CENTER" spacing="30.0">
+               <children>
+                  <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/empty_photo.png" />
+                     </image>
+                  </ImageView>
+                  <VBox alignment="TOP_CENTER" spacing="20.0">
+                     <children>
+                        <VBox alignment="CENTER" maxWidth="340.0" spacing="20.0" styleClass="contact">
+                           <children>
+                              <Label text="Juan Carlos apellido1 apellido2" />
+                              <HBox alignment="CENTER" spacing="30.0">
+                                 <children>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/call.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/edit.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/delete.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>
