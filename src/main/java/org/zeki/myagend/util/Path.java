@@ -3,8 +3,9 @@ package org.zeki.myagend.util;
 public class Path {
     private static Path instance;
     //VIEWS
-    private final String START_VIEW = "/fxml/start-view.fxml";
-    private final String MAIN_AGEND_VIEW = "/fxml/main-agend-view.fxml";
+    private final String START_VIEW = "/fxml/first-scene.fxml";
+    private final String MAIN_AGEND_VIEW = "/fxml/contacts-scene.fxml";
+    private final String ADD_CONTACT_VIEW = "/fxml/detail-contact-scene.fxml";
     //IMG
     private final String MAIN_ICON = "/img/main_icon.png";
     //CSS
@@ -34,5 +35,9 @@ public class Path {
 
     public String getMAIN_AGEND_VIEW() {
         return MAIN_AGEND_VIEW;
+    }
+
+    public String getADD_CONTACT_VIEW() {
+        return ADD_CONTACT_VIEW;
     }
 }

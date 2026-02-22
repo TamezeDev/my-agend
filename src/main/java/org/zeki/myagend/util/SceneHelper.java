@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -28,5 +29,45 @@ public class SceneHelper {
             System.err.println("Error al capturar Stage del nodo");
             e.getMessage();
         }
+    }
+
+    public static void goToNewStage(Node node, String pathUrl) {
+        try {
+            FXMLLoader loader = new FXMLLoader(SceneHelper.class.getResource(pathUrl));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(Objects.requireNonNull(SceneHelper.class.getResource(Path.getInstance().getGLOBAL_STYLES())).toExternalForm());
+
+            Stage oldStage = (Stage) node.getScene().getWindow();
+
+            Stage newStage = new Stage();
+            newStage.setWidth(500);
+            newStage.setHeight(500);
+            newStage.setResizable(false);
+            double[] showPosition = setNewStagePosition(oldStage, newStage); //Always newStage load centered
+            newStage.setX(showPosition[0]);
+            newStage.setY(showPosition[1]);
+
+            newStage.setScene(scene);
+            newStage.initOwner(oldStage);
+            newStage.initModality(Modality.WINDOW_MODAL); //Block main stage until close new stage
+            newStage.showAndWait();
+
+        } catch (IOException e) {
+            System.err.println("Error al capturar Stage del nodo");
+            e.getMessage();
+        }
+
+    }
+
+    private static double[] setNewStagePosition(Stage oldStage, Stage newStage) {
+        double xOffSet;
+        double yOffSet;
+
+        xOffSet = oldStage.getX() + (oldStage.getWidth() / 2 - (newStage.getWidth() / 2));
+        yOffSet = oldStage.getY() + (oldStage.getHeight() / 2 - (newStage.getHeight() / 2) + 50);
+
+        return new double[]{xOffSet, yOffSet};
+
     }
 }
