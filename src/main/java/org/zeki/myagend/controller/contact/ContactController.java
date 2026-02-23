@@ -32,6 +32,11 @@ public class ContactController {
     public List<Contact> getContacts() {
         return contacts;
     }
+
+    public void loadUserContacts(){
+        ContactFileController fileController = new ContactFileController();
+        contacts = fileController.loadContactsFile();
+    }
 }
 
 

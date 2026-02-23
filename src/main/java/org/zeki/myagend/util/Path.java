@@ -14,6 +14,8 @@ public class Path {
     private final String EMPTY_PHOTO = "/img/empty_photo.png";
     //CSS
     private final String GLOBAL_STYLES = "/css/global-styles.css";
+    //FILE
+    private final String CONTACTS_FILE = "contactData/contacts.bin";
 
     private Path() {
     }
@@ -60,5 +62,9 @@ public class Path {
     public String getADD_CONTACT_VIEW() {
         return ADD_CONTACT_VIEW;
 
+    }
+
+    public String getCONTACTS_FILE() {
+        return CONTACTS_FILE;
     }
 }

@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.zeki.myagend.controller.contact.ContactController;
+import org.zeki.myagend.controller.contact.ContactFileController;
 
 import java.io.File;
 import java.util.HashMap;
@@ -64,6 +65,7 @@ public class DetailContactSceneController {
 
     @FXML
     public void btnAddContact() {
+        ContactFileController fileController = new ContactFileController();
         //check required fields
         if (checkEmptyFields()) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -85,6 +87,7 @@ public class DetailContactSceneController {
         }
         ContactController.getInstance().addNewContact(contactData);
         closeStage(txtName);
+        fileController.saveContactsToFile();
         parentController.loadContactBox();
     }
 
