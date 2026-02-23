@@ -25,6 +25,7 @@ public class ContactsSceneController {
 
     @FXML
     public void initialize() {
+        ContactController.getInstance().loadUserContacts();
         loadContactBox();
     }
 

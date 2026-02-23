@@ -43,7 +43,7 @@ public class FirstSceneController extends Application {
         stage.setTitle(nameAPP);
         stage.setResizable(true);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(Path.getInstance().getSTART_VIEW()));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(Path.getInstance().getMAIN_AGEND_VIEW()));
         Parent root = loader.load();
 
         Scene scene = new Scene(root, 800, 600);

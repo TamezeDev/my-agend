@@ -1,11 +1,14 @@
 package org.zeki.myagend.model;
 
-public class Contact {
+import java.io.Serializable;
+
+public class Contact implements Serializable {
     private String name;
     private String surname;
     private String phone;
     private String email;
     private String pathPhoto;
+    private static final long SERIAL_VERSION_UID = 1L;
 
 
     public Contact(String name, String surname, String phone) {
