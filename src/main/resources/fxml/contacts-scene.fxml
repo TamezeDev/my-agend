@@ -16,8 +16,7 @@
             <Button mnemonicParsing="false" onAction="#addContact" styleClass="model-ButtonA" text="Añadir contacto" />
             <HBox alignment="CENTER">
                <children>
-                  <TextField alignment="CENTER" promptText="Buscar contacto" />
-                  <Button mnemonicParsing="false" text="Buscar" />
+                  <TextField fx:id="txtSearch" alignment="CENTER" promptText="Buscar contacto" />
                </children>
             </HBox>
             <ColorPicker />

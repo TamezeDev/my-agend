@@ -8,6 +8,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.zeki.myagend.controller.scene.ContactsSceneController;
 import org.zeki.myagend.controller.scene.DetailContactSceneController;
+import org.zeki.myagend.model.Contact;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -33,7 +34,7 @@ public class SceneHelper {
         }
     }
 
-    public static void goToNewStage(Node node, String pathUrl, ContactsSceneController reference) {
+    public static void goToNewStage(Node node, String pathUrl, ContactsSceneController reference, Contact contact) {
         try {
             FXMLLoader loader = new FXMLLoader(SceneHelper.class.getResource(pathUrl));
             Parent root = loader.load();
@@ -44,6 +45,7 @@ public class SceneHelper {
             //Get reference to return contacts data on oldStage
             DetailContactSceneController detailContactSceneController = loader.getController();
             detailContactSceneController.setParentController(reference);
+            detailContactSceneController.setCurrentContact(contact);
 
             Stage newStage = new Stage();
             newStage.setWidth(500);
