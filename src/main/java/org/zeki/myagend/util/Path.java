@@ -8,17 +8,21 @@ public class Path {
     private final String ADD_CONTACT_VIEW = "/fxml/detail-contact-scene.fxml";
     //IMG
     private final String MAIN_ICON = "/img/main_icon.png";
+    private final String CALL_ICON = "/img/call.png";
+    private final String EDIT_ICON = "/img/edit.png";
+    private final String DELETE_ICON = "/img/delete.png";
+    private final String EMPTY_PHOTO = "/img/empty_photo.png";
     //CSS
     private final String GLOBAL_STYLES = "/css/global-styles.css";
 
-    private Path(){
+    private Path() {
     }
 
-    public static Path getInstance(){
-        if (instance == null){
+    public static Path getInstance() {
+        if (instance == null) {
             instance = new Path();
         }
-        return  instance;
+        return instance;
     }
 
     public String getSTART_VIEW() {
@@ -37,7 +41,24 @@ public class Path {
         return MAIN_AGEND_VIEW;
     }
 
+    public String getCALL_ICON() {
+        return CALL_ICON;
+    }
+
+    public String getEDIT_ICON() {
+        return EDIT_ICON;
+    }
+
+    public String getDELETE_ICON() {
+        return DELETE_ICON;
+    }
+
+    public String getEMPTY_PHOTO() {
+        return EMPTY_PHOTO;
+    }
+
     public String getADD_CONTACT_VIEW() {
         return ADD_CONTACT_VIEW;
+
     }
 }

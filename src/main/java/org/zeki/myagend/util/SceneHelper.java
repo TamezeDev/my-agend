@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.zeki.myagend.controller.scene.ContactsSceneController;
+import org.zeki.myagend.controller.scene.DetailContactSceneController;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -26,12 +28,12 @@ public class SceneHelper {
             stage.show();
 
         } catch (IOException e) {
-            System.err.println("Error al capturar Stage del nodo");
+            System.err.println("Error al capturar algún atributo de nodo");
             e.getMessage();
         }
     }
 
-    public static void goToNewStage(Node node, String pathUrl) {
+    public static void goToNewStage(Node node, String pathUrl, ContactsSceneController reference) {
         try {
             FXMLLoader loader = new FXMLLoader(SceneHelper.class.getResource(pathUrl));
             Parent root = loader.load();
@@ -39,6 +41,9 @@ public class SceneHelper {
             scene.getStylesheets().add(Objects.requireNonNull(SceneHelper.class.getResource(Path.getInstance().getGLOBAL_STYLES())).toExternalForm());
 
             Stage oldStage = (Stage) node.getScene().getWindow();
+            //Get reference to return contacts data on oldStage
+            DetailContactSceneController detailContactSceneController = loader.getController();
+            detailContactSceneController.setParentController(reference);
 
             Stage newStage = new Stage();
             newStage.setWidth(500);
@@ -54,12 +59,11 @@ public class SceneHelper {
             newStage.showAndWait();
 
         } catch (IOException e) {
-            System.err.println("Error al capturar Stage del nodo");
+            System.err.println("Error al capturar algún atributo de nodo");
             e.getMessage();
         }
 
     }
-
     private static double[] setNewStagePosition(Stage oldStage, Stage newStage) {
         double xOffSet;
         double yOffSet;
