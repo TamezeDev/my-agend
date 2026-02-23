@@ -13,6 +13,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.zeki.myagend.controller.contact.ContactController;
 import org.zeki.myagend.controller.contact.ContactFileController;
+import org.zeki.myagend.model.Contact;
 
 import java.io.File;
 import java.util.HashMap;
@@ -39,10 +40,12 @@ public class DetailContactSceneController {
     private String pathImage;
 
     private ContactsSceneController parentController;
+    private Contact contact;
 
     @FXML
     public void initialize() {
         checkToCloseStage();
+
     }
 
     @FXML
@@ -50,7 +53,7 @@ public class DetailContactSceneController {
         //Open Stage to select photo's path
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Seleccionar foto");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imágenes", "*.jpg", "*.png", "*.jpeg", "*.gif"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imágenes", "*.jpg", "*.png", "*.jpeg", "*.gif", "*.JPEG"));
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
         File file = fileChooser.showOpenDialog(stage);
@@ -75,20 +78,28 @@ public class DetailContactSceneController {
             return;
         }
         //save contact data
-        Map<String, String> contactData = new HashMap<>();
-        contactData.put("name", txtName.getText());
-        contactData.put("surname", txtSurname.getText());
-        contactData.put("phone", txtPhone.getText());
-        if (!txtEmail.toString().isBlank()) {
-            contactData.put("email", txtEmail.getText());
+        if (ContactController.getInstance().checkContactInList(contact)) {
+            updateChanges();
         }
-        if (pathImage != null) {
-            contactData.put("photo", pathImage);
+        else if (contact == null && ContactController.getInstance().checkIfExistsSameName(txtName + " " + txtSurname)) {
+            showAlertDuplicateContact();
+            return;
+        }else{
+            Map<String, String> contactData = new HashMap<>();
+            contactData.put("name", txtName.getText());
+            contactData.put("surname", txtSurname.getText());
+            contactData.put("phone", txtPhone.getText());
+            if (!txtEmail.toString().isBlank()) {
+                contactData.put("email", txtEmail.getText());
+            }
+            if (pathImage != null) {
+                contactData.put("photo", pathImage);
+            }
+            ContactController.getInstance().addNewContact(contactData);
         }
-        ContactController.getInstance().addNewContact(contactData);
         closeStage(txtName);
         fileController.saveContactsToFile();
-        parentController.loadContactBox();
+        parentController.loadContactBox(ContactController.getInstance().getContacts());
     }
 
     @FXML
@@ -107,6 +118,25 @@ public class DetailContactSceneController {
             }
         } else {
             currentStage.close();
+        }
+    }
+
+    private void showAlertDuplicateContact(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Contacto duplicado");
+        alert.setHeaderText("Ya existe un contacto con el mismo nombre y apellidos");
+    }
+
+    private void updateChanges() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmar cambios");
+        alert.setHeaderText("¿Quieres modificar el contacto?");
+        if (alert.showAndWait().get() == ButtonType.OK) {
+            contact.setName(txtName.getText());
+            contact.setSurname(txtSurname.getText());
+            contact.setEmail(txtEmail.getText());
+            contact.setPhone(txtPhone.getText());
+            contact.setPathPhoto(pathImage);
         }
     }
 
@@ -156,4 +186,19 @@ public class DetailContactSceneController {
     public void setParentController(ContactsSceneController parentController) {
         this.parentController = parentController;
     }
+
+    public  void setCurrentContact(Contact contact){
+        if (contact != null){
+            this.contact = contact;
+            txtName.setText(contact.getName());
+            txtSurname.setText(contact.getSurname());
+            txtEmail.setText(contact.getEmail());
+            txtPhone.setText(contact.getPhone());
+            if (contact.getPathPhoto() != null){
+                imgViewContactPhoto.setImage(new Image(new File(contact.getPathPhoto()).toURI().toString()));
+
+            }
+        }
+    }
+
 }
