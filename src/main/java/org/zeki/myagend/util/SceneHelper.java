@@ -24,8 +24,11 @@ public class SceneHelper {
             FXMLLoader loader = new FXMLLoader(SceneHelper.class.getResource(pathFxml));
             Parent root = loader.load();
 
+            //load saved theme
+            ThemeFileController themeController = new ThemeFileController();
             Scene scene = new Scene(root);
             scene.getStylesheets().add(Objects.requireNonNull(SceneHelper.class.getResource(Path.getInstance().getGLOBAL_STYLES())).toExternalForm());
+            scene.getStylesheets().add(Objects.requireNonNull(SceneHelper.class.getResource(themeController.loadConfigTheme())).toExternalForm());
 
             Stage stage = (Stage) (node.getScene().getWindow());
             stage.setScene(scene);
