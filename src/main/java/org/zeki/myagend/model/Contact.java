@@ -8,7 +8,7 @@ public class Contact implements Serializable {
     private String phone;
     private String email;
     private String pathPhoto;
-    private static final long SERIAL_VERSION_UID = 1L;
+    private static long serialVersionUID = 1L;
 
 
     public Contact(String name, String surname, String phone) {

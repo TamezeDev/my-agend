@@ -1,0 +1,10 @@
+/* ROOT-COLORS */
+:root {
+    -bg-main: #7963B5;
+    -bg-secondary: #8F63B5;
+    -bg-card: #D3D5F5;
+    -bg-scroll-bar: #AE82D1;
+    -button-main: #D3D5F5;
+    -button-main-hover: #7E82D1;
+    -button-secondary-hover: #8645BE;
+}

@@ -10,6 +10,7 @@ module org.zeki.myagend {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires javafx.graphics;
 
     opens org.zeki.myagend to javafx.fxml;
     exports org.zeki.myagend;

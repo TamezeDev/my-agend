@@ -18,17 +18,17 @@
                   <TextField fx:id="txtSearch" alignment="CENTER" promptText="Buscar contacto" />
                </children>
             </HBox>
-            <Button mnemonicParsing="false" styleClass="model-ButtonA" text="Elegir colores" />
+            <Button mnemonicParsing="false" onAction="#goToSelectTheme" styleClass="model-ButtonA" text="Elegir colores" />
          </children>
          <BorderPane.margin>
-            <Insets bottom="10.0" top="20.0" />
+            <Insets top="20.0" />
          </BorderPane.margin>
       </HBox>
    </top>
    <center>
       <ScrollPane fitToWidth="true" maxHeight="400.0" maxWidth="450.0" BorderPane.alignment="CENTER">
          <content>
-            <VBox fx:id="boxPaneContactList" alignment="TOP_CENTER">
+            <VBox fx:id="boxPaneContactList" alignment="TOP_CENTER" spacing="15.0">
                <padding>
                   <Insets right="10.0" />
                </padding></VBox>

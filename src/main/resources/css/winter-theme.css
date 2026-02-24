@@ -1,0 +1,10 @@
+/*  WINTER_THEME */
+:root {
+    -bg-main: #ABB0D1;
+    -bg-secondary: #8891CD;
+    -bg-card: #E6E9FF;
+    -bg-scroll-bar: #C5CAE9;
+    -button-main: #5C6BC0;
+    -button-main-hover: #4B5DC4;
+    -button-secondary-hover: #C5CAE9;
+}

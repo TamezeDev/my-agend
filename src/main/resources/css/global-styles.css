@@ -5,10 +5,10 @@
     -fx-padding: 0 0 40px 0 ;
 }
 #startPane, #mainMenuPane {
-    -fx-background-color: #7963B5;
+    -fx-background-color: -bg-main;
 }
-#contactPane {
-    -fx-background-color: #8F63B5;
+#contactPane, #themePane {
+    -fx-background-color: -bg-secondary;
  }
 /* CONTACTS-SCENE */
 TextField {
@@ -26,12 +26,12 @@ TextField {
     -fx-padding: 10px 15px 10px 15px;
     -fx-font-size: 20px;
     -fx-background-radius: 8px;
-    -fx-background-color: #D3D5F5;
+    -fx-background-color: -bg-card;
     -fx-font-family:"Elephant"
 }
 .model-ButtonA:hover{
     -fx-cursor:hand;
-    -fx-background-color: #7E82D1;
+    -fx-background-color: -button-main-hover;
 }
 .model-BottonB {
     -fx-background-color: transparent;
@@ -40,24 +40,29 @@ TextField {
 }
 .model-BottonB:hover {
     -fx-cursor:hand;
-    -fx-background-color: #8645BE ;
+    -fx-background-color: -button-secondary-hover;
 }
 .model-LabelA {
     -fx-font-size: 16px;
     -fx-font-family: "Elephant";
 }
+.model-LabelB {
+    -fx-font-size:20px;
+    -fx-font-family: "Elephant";
+    -fx-text-fill:#000;
+}
 #selectionPhoto:hover {
     cursor:hand;
 }
 .contact, .info{
-    -fx-background-color: #D3D5F5;
+    -fx-background-color: -bg-card;
     -fx-background-radius: 8px;
     -fx-font-family: "Elephant";
     -fx-font-size: 18px;
     -fx-padding: 10px 20px 10px 20px;
 }
 .contact:hover {
-    -fx-background-color: #AE82D1;
+    -fx-background-color: -button-main-hover;
 }
 .option:hover {
     -fx-cursor: hand;
@@ -74,13 +79,13 @@ ScrollPane > .scroll-bar:vertical {
     -fx-background-color: transparent;
 }
 ScrollPane > .scroll-bar:vertical .track {
-    -fx-background-color: #AE82D1;
+    -fx-background-color: -bg-scroll-bar;
 }
 ScrollPane > .scroll-bar:vertical .thumb {
-    -fx-background-color: #D3D5F5B5;
+    -fx-background-color: -bg-main;
     -fx-background-radius: 5;
 }
 ScrollPane > .scroll-bar:vertical .thumb:hover {
-    -fx-background-color:  #7E82D1;
+    -fx-background-color:  -button-main-hover;
 }
 
