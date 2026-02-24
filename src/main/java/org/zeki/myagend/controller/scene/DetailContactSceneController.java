@@ -44,6 +44,7 @@ public class DetailContactSceneController {
 
     @FXML
     public void initialize() {
+        acceptOnlyNumbersForPhone();
         checkToCloseStage();
 
     }
@@ -80,11 +81,10 @@ public class DetailContactSceneController {
         //save contact data
         if (ContactController.getInstance().checkContactInList(contact)) {
             updateChanges();
-        }
-        else if (contact == null && ContactController.getInstance().checkIfExistsSameName(txtName + " " + txtSurname)) {
+        } else if (contact == null && ContactController.getInstance().checkIfExistsSameName(txtName.getText() + " " + txtSurname.getText())) {
             showAlertDuplicateContact();
             return;
-        }else{
+        } else {
             Map<String, String> contactData = new HashMap<>();
             contactData.put("name", txtName.getText());
             contactData.put("surname", txtSurname.getText());
@@ -97,9 +97,9 @@ public class DetailContactSceneController {
             }
             ContactController.getInstance().addNewContact(contactData);
         }
-        closeStage(txtName);
         fileController.saveContactsToFile();
         parentController.loadContactBox(ContactController.getInstance().getContacts());
+        closeStage(txtName);
     }
 
     @FXML
@@ -110,7 +110,7 @@ public class DetailContactSceneController {
         if (!checkTextFieldsWritten()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Cerrar ventana");
-            alert.setHeaderText("¿Quieres cerrar la ventana sin agregar el contacto?");
+            alert.setHeaderText("¿Quieres cerrar la ventana y descartar los cambios?");
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
@@ -121,10 +121,25 @@ public class DetailContactSceneController {
         }
     }
 
-    private void showAlertDuplicateContact(){
+    private void showAlertDuplicateContact() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Contacto duplicado");
         alert.setHeaderText("Ya existe un contacto con el mismo nombre y apellidos");
+    }
+
+    private void acceptOnlyNumbersForPhone() {
+
+        txtPhone.textProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                txtPhone.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+            if (!newValue.isEmpty()) {
+                String currentPhone = txtPhone.getText();
+                if (currentPhone.length() > 9) {
+                    txtPhone.setText(oldValue);
+                }
+            }
+        });
     }
 
     private void updateChanges() {
@@ -149,7 +164,7 @@ public class DetailContactSceneController {
                 if (!checkTextFieldsWritten()) {
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Cerrar ventana");
-                    alert.setHeaderText("¿Quieres cerrar la ventana sin agregar el contacto?");
+                    alert.setHeaderText("¿Quieres cerrar la ventana sin y descartar los cambios?");
                     if (alert.showAndWait().get() == ButtonType.OK) {
                         currentStage.close();
                     }
@@ -187,16 +202,16 @@ public class DetailContactSceneController {
         this.parentController = parentController;
     }
 
-    public  void setCurrentContact(Contact contact){
-        if (contact != null){
+    public void setCurrentContact(Contact contact) {
+        if (contact != null) {
             this.contact = contact;
             txtName.setText(contact.getName());
             txtSurname.setText(contact.getSurname());
             txtEmail.setText(contact.getEmail());
             txtPhone.setText(contact.getPhone());
-            if (contact.getPathPhoto() != null){
+            if (contact.getPathPhoto() != null) {
                 imgViewContactPhoto.setImage(new Image(new File(contact.getPathPhoto()).toURI().toString()));
-
+                pathImage = contact.getPathPhoto();
             }
         }
     }

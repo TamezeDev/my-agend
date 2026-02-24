@@ -56,7 +56,6 @@ public class ContactsSceneController {
             HBox contactCard = createImgBox(contact);
             boxPaneContactList.getChildren().add(contactCard);
         });
-        ignoreClicks = false;
     }
 
     private HBox createImgBox(Contact contact) {
@@ -86,7 +85,10 @@ public class ContactsSceneController {
     private void showContactInfo(HBox fullContactContainer) {
 
         fullContactContainer.setOnMouseClicked(ev -> {
-            if (ignoreClicks) return;
+            if (ignoreClicks) {
+                ignoreClicks = false;
+                return;
+            }
             HBox nodeSelected = (HBox) ev.getSource();
             VBox parent = (VBox) nodeSelected.getParent();
             if (parent == null) return;
@@ -169,12 +171,26 @@ public class ContactsSceneController {
 
         deleteContactContainer(deleteImg, fullName);
         editContact(editImg, fullName);
+        showCallingInfo(callImg, fullName);
 
         return optionHbox;
     }
 
+    private void showCallingInfo(ImageView callImg, String fullName) {
+        callImg.setOnMouseClicked(event -> {
+            ignoreClicks = true;
+            Contact contact = ContactController.getInstance().getSingleContact(fullName);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Llamada");
+            alert.setHeaderText("Llamando a " + contact.getPhone() + " - " + contact.getName() + " " + contact.getSurname());
+            alert.setContentText("Hey espabila!! Esto es una simulación. ¿Como vas a llamar a un número de teléfono desde el ordenador? 😏");
+            alert.show();
+        });
+    }
+
     public void editContact(ImageView editImg, String fullName) {
         editImg.setOnMouseClicked(event -> {
+            ignoreClicks = true;
             Node node = (Node) event.getSource();
             Contact contact = ContactController.getInstance().getSingleContact(fullName);
             String pathFXML = Path.getInstance().getADD_CONTACT_VIEW();
