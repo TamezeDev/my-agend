@@ -4,10 +4,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.zeki.myagend.controller.scene.ContactsSceneController;
 import org.zeki.myagend.controller.scene.DetailContactSceneController;
+import org.zeki.myagend.controller.scene.ThemeSceneController;
+import org.zeki.myagend.controller.theme.ThemeFileController;
 import org.zeki.myagend.model.Contact;
 
 import java.io.IOException;
@@ -38,20 +41,37 @@ public class SceneHelper {
         try {
             FXMLLoader loader = new FXMLLoader(SceneHelper.class.getResource(pathUrl));
             Parent root = loader.load();
+            //load saved theme
+            ThemeFileController themeController = new ThemeFileController();
+
             Scene scene = new Scene(root);
             scene.getStylesheets().add(Objects.requireNonNull(SceneHelper.class.getResource(Path.getInstance().getGLOBAL_STYLES())).toExternalForm());
-
-            Stage oldStage = (Stage) node.getScene().getWindow();
-            //Get reference to return contacts data on oldStage
-            DetailContactSceneController detailContactSceneController = loader.getController();
-            detailContactSceneController.setParentController(reference);
-            detailContactSceneController.setCurrentContact(contact);
+            scene.getStylesheets().add(Objects.requireNonNull(SceneHelper.class.getResource(themeController.loadConfigTheme())).toExternalForm());
+            Image mainIcon = new Image(Objects.requireNonNull(SceneHelper.class.getResourceAsStream(Path.getInstance().getMAIN_ICON())));
+            Scene oldScene = node.getScene();
+            Stage oldStage = (Stage) oldScene.getWindow();
 
             Stage newStage = new Stage();
             newStage.setWidth(500);
             newStage.setHeight(500);
             newStage.setResizable(false);
-            double[] showPosition = setNewStagePosition(oldStage, newStage); //Always newStage load centered
+            newStage.getIcons().add(mainIcon);
+
+            double[] showPosition;
+            if (pathUrl.equals(Path.getInstance().getADD_CONTACT_VIEW())) {
+                //Get reference to return contacts data on oldStage
+                //Always newStage load centered
+                DetailContactSceneController detailContactSceneController = loader.getController();
+                detailContactSceneController.setParentController(reference);
+                detailContactSceneController.setCurrentContact(contact);
+                showPosition = setNewStagePosition(oldStage, newStage);
+            } else {
+                //Get reference to return contacts data on oldStage
+                //load at right-up corner
+                ThemeSceneController themeSceneController = loader.getController();
+                themeSceneController.setSceneReference(oldScene);
+                showPosition = setNewColorStage(oldStage, newStage);
+            }
             newStage.setX(showPosition[0]);
             newStage.setY(showPosition[1]);
 
@@ -76,5 +96,15 @@ public class SceneHelper {
 
         return new double[]{xOffSet, yOffSet};
 
+    }
+
+    private static double[] setNewColorStage(Stage oldStage, Stage newStage) {
+        double xOffSet;
+        double yOffSet;
+
+        xOffSet = oldStage.getX() + (oldStage.getWidth() - (newStage.getWidth()));
+        yOffSet = oldStage.getY();
+
+        return new double[]{xOffSet, yOffSet};
     }
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox id="themePane" alignment="TOP_CENTER" prefHeight="500.0" prefWidth="500.0" spacing="20.0" styleClass="model-LabelB" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.zeki.myagend.controller.scene.ThemeSceneController">
+   <children>
+      <Label text="Selecciona paleta de colores" />
+      <Button mnemonicParsing="false" onAction="#selectDefaultTheme" styleClass="model-ButtonA" text="Default" />
+      <Button mnemonicParsing="false" onAction="#selectSpringTheme" styleClass="model-ButtonA" text="Spring" />
+      <Button mnemonicParsing="false" onAction="#selectSummerTheme" styleClass="model-ButtonA" text="Summer" />
+      <Button mnemonicParsing="false" onAction="#selectAutumnTheme" styleClass="model-ButtonA" text="Autumn" />
+      <Button layoutX="221.0" layoutY="120.0" mnemonicParsing="false" onAction="#selectWinterTheme" styleClass="model-ButtonA" text="Winter" />
+      <Button mnemonicParsing="false" onAction="#acceptChanges" styleClass="model-ButtonA" text="Aceptar" />
+   </children>
+   <padding>
+      <Insets top="10.0" />
+   </padding>
+</VBox>

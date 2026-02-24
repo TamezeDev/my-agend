@@ -30,6 +30,7 @@ public class ContactsSceneController {
     private TextField txtSearch;
 
     private boolean ignoreClicks;
+    private String contactShowed = "";
 
     @FXML
     public void initialize() {
@@ -45,12 +46,19 @@ public class ContactsSceneController {
         SceneHelper.goToNewStage(nodeEvent, addContactPath, this, null);
     }
 
+    @FXML
+    private void goToSelectTheme(ActionEvent event) {
+        Node node = (Node) event.getSource();
+        String pathFxml = Path.getInstance().getTHEME_SCENE();
+        SceneHelper.goToNewStage(node, pathFxml, this, null);
+    }
+
     private void filterContact() {
         txtSearch.textProperty().addListener(((obs, oldText, newText) -> loadContactBox(ContactController.getInstance().filterByLetters(newText))));
     }
 
     public void loadContactBox(List<Contact> contacts) {
-        ignoreClicks = true;
+
         boxPaneContactList.getChildren().clear();
         contacts.forEach(contact -> {
             HBox contactCard = createImgBox(contact);
@@ -96,6 +104,12 @@ public class ContactsSceneController {
             VBox boxLabel = (VBox) nodeSelected.getChildren().get(1);
             Label label = (Label) boxLabel.getChildren().getFirst();
             String fullName = label.getText();
+            if (contactShowed.equals(fullName)) {
+                removeVisibleContact(parent);
+                contactShowed = "";
+                return;
+            }
+            contactShowed = fullName;
             int indexSelected = parent.getChildren().indexOf(nodeSelected);
 
             VBox contactInfo = createContactInfoBox(fullName);

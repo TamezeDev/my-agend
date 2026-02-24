@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.zeki.myagend.controller.theme.ThemeFileController;
 import org.zeki.myagend.util.Path;
 import org.zeki.myagend.util.SceneHelper;
 
@@ -43,11 +44,15 @@ public class FirstSceneController extends Application {
         stage.setTitle(nameAPP);
         stage.setResizable(true);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(Path.getInstance().getMAIN_AGEND_VIEW()));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(Path.getInstance().getSTART_VIEW()));
         Parent root = loader.load();
+
+        //load saved theme
+        ThemeFileController themeController = new ThemeFileController();
 
         Scene scene = new Scene(root, 800, 600);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Path.getInstance().getGLOBAL_STYLES())).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(themeController.loadConfigTheme())).toExternalForm());
         Image mainIcon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(Path.getInstance().getMAIN_ICON())));
 
         stage.getIcons().add(mainIcon);
