@@ -66,6 +66,7 @@ public class SceneHelper {
         }
 
     }
+
     private static double[] setNewStagePosition(Stage oldStage, Stage newStage) {
         double xOffSet;
         double yOffSet;

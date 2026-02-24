@@ -70,4 +70,17 @@ ScrollPane {
 ScrollPane > .viewport {
     -fx-background-color: transparent;
 }
+ScrollPane > .scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+ScrollPane > .scroll-bar:vertical .track {
+    -fx-background-color: #AE82D1;
+}
+ScrollPane > .scroll-bar:vertical .thumb {
+    -fx-background-color: #D3D5F5B5;
+    -fx-background-radius: 5;
+}
+ScrollPane > .scroll-bar:vertical .thumb:hover {
+    -fx-background-color:  #7E82D1;
+}
 

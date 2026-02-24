@@ -75,8 +75,8 @@ public class FirstSceneController extends Application {
         PauseTransition pauseFinal = new PauseTransition(Duration.seconds(2));
         String pathScene = Path.getInstance().getMAIN_AGEND_VIEW();
         pauseFinal.setOnFinished(event ->
-                        Platform.runLater(() ->  SceneHelper.goToNewScene(title, pathScene))
-               );
+                Platform.runLater(() -> SceneHelper.goToNewScene(title, pathScene))
+        );
         //Sequence..
         SequentialTransition sequence = new SequentialTransition(
                 fadeTitle, pauseTransition, fadeLogo, pauseFinal
