@@ -11,6 +11,10 @@ public class ThemeFileController {
     public void saveConfigTheme() {
         File file = new File(Path.getInstance().getCONFIG_FILE());
 
+        File parent = file.getParentFile();
+        if (parent != null && !parent.exists()) {
+            parent.mkdirs();
+        }
         try {
             if (!file.exists()) {
                 file.createNewFile();

@@ -55,6 +55,7 @@ public class ThemeSceneController {
         fileController.setThemSelected(nodeEvent.getText());
     }
 
+    @FXML
     public void acceptChanges(ActionEvent event) {
 
         Node node = (Node)event.getSource();
@@ -65,6 +66,7 @@ public class ThemeSceneController {
         alert.setHeaderText("Paleta de colores guardada correctamente");
         alert.show();
         fileController.saveConfigTheme();
+        System.out.println("Guardado ok");
         currentStage.close();
     }
 

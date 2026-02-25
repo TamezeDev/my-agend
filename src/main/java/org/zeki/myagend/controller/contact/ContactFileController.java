@@ -13,6 +13,10 @@ public class ContactFileController {
         File file = new File(Path.getInstance().getCONTACTS_FILE());
         List<Contact> contacts = ContactController.getInstance().getContacts();
         try {
+            File parent = file.getParentFile();
+            if (parent != null && !parent.exists()) {
+                parent.mkdirs();
+            }
             if (!file.exists()) {
                 file.createNewFile();
             }
